@@ -1,0 +1,46 @@
+{
+    "name": "walkerchiu/php-blog",
+    "type": "library",
+    "authors": [
+        {
+            "name":  "Walker Chiu",
+            "email": "chenjen.chiou@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.3",
+        "walkerchiu/php-core": "^1.0",
+        "walkerchiu/php-morph-category": "^1.0",
+        "walkerchiu/php-morph-comment": "^1.0",
+        "walkerchiu/php-morph-image": "^1.0",
+        "walkerchiu/php-morph-registration": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WalkerChiu\\Blog\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WalkerChiu\\Blog\\BlogServiceProvider"
+            ],
+            "aliases": {
+                "Article": "WalkerChiu\\Blog\\Models\\Entities\\Article",
+                "Blog":    "WalkerChiu\\Blog\\Models\\Entities\\Blog",
+                "Follow":  "WalkerChiu\\Blog\\Models\\Entities\\Follow",
+                "Like":    "WalkerChiu\\Blog\\Models\\Entities\\Like",
+                "Tag":     "WalkerChiu\\Blog\\Models\\Entities\\Tag",
+                "Touch":   "WalkerChiu\\Blog\\Models\\Entities\\Touch"
+            }
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}
