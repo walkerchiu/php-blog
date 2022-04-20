@@ -108,15 +108,12 @@ class BlogObserver
      */
     public function deleted($entity)
     {
-        if (!config('wk-blog.soft_delete')) {
-            $entity->forceDelete();
-        }
-
         if ($entity->isForceDeleting()) {
             $entity->langs()->withTrashed()
                             ->forceDelete();
-            foreach ($entity->articles as $article) {
-                $article->withTrashed()->forceDelete();
+            $records = $entity->articles()->withTrashed()->get();
+            foreach ($records as $recoed) {
+                $recoed->forceDelete();
             }
             $entity->tags()->detach();
 
@@ -124,19 +121,28 @@ class BlogObserver
                 config('wk-blog.onoff.firewall')
                 && !empty(config('wk-core.class.firewall.firewall'))
             ) {
-                $entity->firewalls()->withTrashed()->delete();
+                $records = $entity->firewalls()->withTrashed()->get();
+                foreach ($records as $recoed) {
+                    $recoed->forceDelete();
+                }
             }
             if (
                 config('wk-blog.onoff.morph-address')
                 && !empty(config('wk-core.class.morph-address.address'))
             ) {
-                $entity->addresses()->withTrashed()->forceDelete();
+                $records = $entity->addresses()->withTrashed()->get();
+                foreach ($records as $recoed) {
+                    $recoed->forceDelete();
+                }
             }
             if (
                 config('wk-blog.onoff.morph-board')
                 && !empty(config('wk-core.class.morph-board.board'))
             ) {
-                $entity->boards()->withTrashed()->forceDelete();
+                $records = $entity->boards()->withTrashed()->get();
+                foreach ($records as $recoed) {
+                    $recoed->forceDelete();
+                }
             }
             if (
                 config('wk-blog.onoff.morph-category')
@@ -148,20 +154,33 @@ class BlogObserver
                 config('wk-blog.onoff.morph-image')
                 && !empty(config('wk-core.class.morph-image.image'))
             ) {
-                $entity->images()->withTrashed()->forceDelete();
+                $records = $entity->images()->withTrashed()->get();
+                foreach ($records as $recoed) {
+                    $recoed->forceDelete();
+                }
             }
             if (
                 config('wk-blog.onoff.morph-registration')
                 && !empty(config('wk-core.class.morph-registration.registration'))
             ) {
-                $entity->registrations()->withTrashed()->forceDelete();
+                $records = $entity->registrations()->withTrashed()->get();
+                foreach ($records as $recoed) {
+                    $recoed->forceDelete();
+                }
             }
             if (
                 config('wk-blog.onoff.morph-link')
                 && !empty(config('wk-core.class.morph-link.link'))
             ) {
-                $entity->links()->withTrashed()->forceDelete();
+                $records = $entity->links()->withTrashed()->get();
+                foreach ($records as $recoed) {
+                    $recoed->forceDelete();
+                }
             }
+        }
+
+        if (!config('wk-blog.soft_delete')) {
+            $entity->forceDelete();
         }
     }
 
