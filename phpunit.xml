@@ -1,0 +1,26 @@
+<phpunit>
+
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="BlogTest.php">./tests/Entities</directory>
+            <directory suffix="BlogLangTest.php">./tests/Entities</directory>
+            <directory suffix="BlogFormRequestTest.php">./tests/Forms</directory>
+            <directory suffix="ArticleTest.php">./tests/Entities</directory>
+            <directory suffix="ArticleLangTest.php">./tests/Entities</directory>
+            <directory suffix="ArticleFormRequestTest.php">./tests/Forms</directory>
+            <directory suffix="CategoryTest.php">./tests/Entities</directory>
+            <directory suffix="CategoryLangTest.php">./tests/Entities</directory>
+            <directory suffix="TagTest.php">./tests/Entities</directory>
+            <directory suffix="TagLangTest.php">./tests/Entities</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory suffix="BlogRepositoryTest.php">./tests/Repositories</directory>
+            <directory suffix="ArticleRepositoryTest.php">./tests/Repositories</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+    </php>
+
+</phpunit>
